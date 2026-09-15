@@ -1,0 +1,39 @@
+{
+	"name": "dresscode/rules-deegee",
+	"description": "👔 Upgrades code written for older Dibi and Texy to their current API: renamed constants, methods and classes are rewritten, the rest is reported with what to write instead.",
+	"keywords": ["dibi", "texy", "database", "markup", "upgrade", "upgrading", "migration", "deprecations", "refactoring", "codemod", "dresscode"],
+	"homepage": "https://dresscode.run/upgrading-deegee",
+	"license": "MIT",
+	"type": "dresscode-plugin",
+	"authors": [
+		{
+			"name": "David Grudl",
+			"homepage": "https://davidgrudl.com"
+		}
+	],
+	"require": {
+		"php": "8.4 - 8.6",
+		"dresscode/dresscode": "dev-master"
+	},
+	"require-dev": {
+		"phpstan/phpstan": "^2.2",
+		"phpstan/extension-installer": "^1.4",
+		"nette/phpstan-rules": "^1.0"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"scripts": {
+		"phpstan": "phpstan analyse",
+		"tester": "tester tests -s"
+	},
+	"config": {
+		"allow-plugins": {
+			"phpstan/extension-installer": true
+		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.0-dev"
+		}
+	}
+}
