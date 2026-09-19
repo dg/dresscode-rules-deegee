@@ -1,0 +1,131 @@
+package: texy/texy
+intent: deprecations
+
+since 3.2.8:
+	replacedMembers:
+		Texy\Texy::unProtect: unprotect
+	forbiddenMembers:
+		Texy\Texy::HTML4_TRANSITIONAL: 'there is no replacement; the output is always HTML5'
+		Texy\Texy::HTML4_STRICT: 'there is no replacement; the output is always HTML5'
+		Texy\Texy::HTML5: 'there is no replacement; the output is always HTML5'
+		Texy\Texy::XHTML1_TRANSITIONAL: 'there is no replacement; XHTML is not generated any more and the output is always HTML5'
+		Texy\Texy::XHTML1_STRICT: 'there is no replacement; XHTML is not generated any more and the output is always HTML5'
+		Texy\Texy::XHTML5: 'there is no replacement; XHTML is not generated any more and the output is always HTML5'
+		Texy\Texy::XML: 'there is no replacement; XHTML is not generated any more and the output is always HTML5'
+
+since 3.2.6:
+	forbiddenClasses:
+		Texy\Bridges\Latte\TexyMacro: 'support for Latte 2 is gone; register `new Texy\Bridges\Latte\TexyExtension($texy)` with `Latte\Engine::addExtension()`'
+
+since 3.2.3:
+	forbiddenMembers:
+		Texy\Modules\HtmlOutputModule::$removeOptional: 'optional end tags are never removed; drop the setting'
+
+since 3.2:
+	forbiddenClasses:
+		Texy\Strict: 'there is no replacement; the trait is gone; undefined members follow plain PHP semantics'
+	forbiddenMembers:
+		Texy\Modifier::$cite: 'there is no replacement; support for the `cite` attribute is gone'
+		Texy\Modules\BlockQuoteModule::citeLink: 'there is no replacement; support for the `cite` attribute is gone'
+		Texy\Modules\BlockModule::solve: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\BlockModule::beforeBlockParse: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\EmoticonModule::solve: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\EmoticonModule::beforeParse: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\FigureModule::solve: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\HeadingModule::solve: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\HeadingModule::beforeParse: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\HeadingModule::afterParse: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\HorizLineModule::solve: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\HtmlModule::solveTag: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\HtmlModule::solveComment: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\HtmlOutputModule::postProcess: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\HtmlOutputModule::wrap: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\HtmlOutputModule::cb: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\ImageModule::beforeParse: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\ImageModule::patternReferenceDef: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\LinkModule::beforeParse: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\LinkModule::patternReferenceDef: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\LinkModule::solveNewReference: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\LinkModule::solveUrlEmail: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\ListModule::beforeParse: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\ListModule::patternItem: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\LongWordsModule::pattern: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\ParagraphModule::solve: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\PhraseModule::solve: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+		Texy\Modules\ScriptModule::solve: 'the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`'
+
+since 3.1.6:
+	replacedMembers:
+		Texy\HtmlElement::INNER_TEXT: InnerText
+		Texy\HtmlElement::INNER_TRANSPARENT: InnerTransparent
+	forbiddenMembers:
+		Texy\Modules\LongWordsModule::DONT: 'there is no replacement; the constant is private'
+		Texy\Modules\LongWordsModule::HERE: 'there is no replacement; the constant is private'
+		Texy\Modules\LongWordsModule::AFTER: 'there is no replacement; the constant is private'
+		Texy\Modules\LongWordsModule::SAFE_LIMIT: 'there is no replacement; the constant is private'
+
+since 3.1.1:
+	replacedMembers:
+		Texy\Texy::unescapeHtml: Texy\Helpers::unescapeHtml
+	replacedCalls:
+		'Texy\Texy::unescapeHtml($s)': keep
+		'Texy\Modifier::__construct(mod: $m, ...)': 'new \Texy\Modifier(s: $m, ...)'
+		'Texy\Modifier::setProperties(mod: $m)': 'setProperties(s: $m)'
+	forbiddenMembers:
+		Texy\Modules\ScriptModule::$handler: 'register a handler of the `script` event with `Texy\Texy::addHandler()`, which receives the parser, the command, the arguments and the raw text'
+
+since 3.1:
+	forbiddenMembers:
+		Texy\Texy::setOutputMode: 'there is no replacement; the output is always HTML5'
+		Texy\Texy::getOutputMode: 'there is no replacement; the output is always HTML5'
+		Texy\Texy::$xhtml: 'there is no replacement; the output is always HTML5; drop the setting'
+		Texy\Texy::$strictDTD: 'there is no replacement; the output is always HTML5; drop the setting'
+		Texy\Texy::$dtd: 'the DTD is a static read-only table and can no longer be changed at run time'
+		Texy\Texy::$_classes: 'the property is private; the allowed classes are configured by `$allowedClasses`'
+		Texy\Texy::$_styles: 'the property is private; the allowed styles are configured by `$allowedStyles`'
+		Texy\HtmlElement::$xhtml: 'there is no replacement; the output is always HTML5; drop the setting'
+
+since 3.0:
+	replacedClasses:
+		TexyConfigurator: Texy\Configurator
+		TexyHtml: Texy\HtmlElement
+		TexyImage: Texy\Image
+		TexyLink: Texy\Link
+		TexyModifier: Texy\Modifier
+		TexyPatterns: Texy\Patterns
+		TexyHeadingModule: Texy\Modules\HeadingModule
+		TexyLinkModule: Texy\Modules\LinkModule
+		TexyLongWordsModule: Texy\Modules\LongWordsModule
+		TexyTypographyModule: Texy\Modules\TypographyModule
+	replacedMembers:
+		Texy\Texy::$cleaner: $htmlOutputModule
+		Texy\Utf::strtolower: Texy\Helpers::toLower
+		Texy\Utf::utf2ascii: Texy\Helpers::toAscii
+		Texy\Texy::freezeSpaces: Texy\Helpers::freezeSpaces
+		Texy\Texy::unfreezeSpaces: Texy\Helpers::unfreezeSpaces
+		Texy\Texy::isRelative: Texy\Helpers::isRelative
+		Texy\Texy::normalize: Texy\Helpers::normalize
+		Texy\Texy::outdent: Texy\Helpers::outdent
+		Texy\Texy::prependRoot: Texy\Helpers::prependRoot
+		Texy\Texy::webalize: Texy\Helpers::webalize
+	replacedCalls:
+		'Texy\Modules\BlockModule::outdent($s)': '\Texy\Helpers::outdent($s)'
+		'Texy\Texy::escapeHtml($s)': '\htmlspecialchars($s, ENT_NOQUOTES, ''UTF-8'')'
+		'Texy\Texy::unescapeHtml($s)': '\html_entity_decode($s, ENT_QUOTES, ''UTF-8'')'
+		'Texy\Helpers::webalize($s, null)': 'webalize($s)'
+	forbiddenMembers:
+		Texy\Utf::toUtf: 'the input is assumed to be UTF-8; drop the call'
+		Texy\Utf::utfTo: 'the output is always UTF-8; drop the call'
+		Texy\Utf::utf2html: 'the output is always UTF-8; drop the call where the page is UTF-8 too'
+		Texy\Texy::REVISION: 'there is no replacement; `VERSION` holds the version'
+		Texy\Texy::free: 'the method was empty; drop the call'
+		Texy\HandlerInvocation::free: 'the method was empty; drop the call'
+		Texy\Texy::$encoding: 'the input and the output are always UTF-8; drop the setting'
+		Texy\Texy::$styleSheet: 'there is no replacement; Texy never read the property; keep the stylesheet in a variable of the application'
+		Texy\Texy::$advertisingNotice: 'the property had no effect since it was deprecated; drop the setting'
+		Texy\Texy::$xhtml: 'choose the output mode with `setOutputMode()`'
+		Texy\Texy::$strictDTD: 'call `setOutputMode()` with `Texy\Texy::XHTML1_STRICT` or `Texy\Texy::XHTML1_TRANSITIONAL`'
+		Texy\Image::$overURL: 'there is no replacement; the mouse-over state of images is not supported'
+		Texy\Modules\ImageModule::$onLoad: 'there is no replacement; the mouse-over state of images is not supported'
+		Texy\Modules\LinkModule::$imageOnClick: 'there is no replacement; pop-up links are not supported'
+		Texy\Modules\LinkModule::$popupOnClick: 'there is no replacement; pop-up links are not supported'

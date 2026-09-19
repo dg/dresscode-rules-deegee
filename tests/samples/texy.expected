@@ -1,0 +1,121 @@
+<?php
+
+namespace App;
+
+use Texy\Bridges\Latte\TexyMacro;
+use Texy\HandlerInvocation;
+use Texy\Helpers;
+use Texy\HtmlElement;
+use Texy\Image;
+use Texy\Modifier;
+use Texy\Modules\LongWordsModule;
+use Texy\Strict;
+use Texy\Texy;
+use Texy\Utf;
+
+
+class TexyFactory
+{
+	public function create(HandlerInvocation $invocation, \Texy\Link $link, string $s): Texy
+	{
+		$texy = new Texy;
+		$texy->setOutputMode(Texy::XHTML1_STRICT);
+		$mode = $texy->getOutputMode();
+		$texy->encoding = 'windows-1250';
+		$texy->styleSheet = 'p {}';
+		$texy->xhtml = false;
+		Texy::$strictDTD = true;
+		Texy::$advertisingNotice = false;
+		$texy->htmlOutputModule->indent = true;
+		$texy->htmlOutputModule->removeOptional = true;
+		$texy->linkModule->popupOnClick = '';
+		$texy->linkModule->imageOnClick = '';
+		$texy->imageModule->onLoad = '';
+		$texy->scriptModule->handler = $this;
+		$texy->dtd['p'][1]['div'] = 1;
+		$classes = $texy->_classes;
+		$styles = $texy->_styles;
+		HtmlElement::$xhtml = false;
+		$revision = Texy::REVISION;
+		$texy->linkModule->solveUrlEmail($invocation, $link);
+		$texy->htmlOutputModule->postProcess($texy, $s);
+		$cite = $texy->blockQuoteModule->citeLink('https://texy.info');
+		$html = $texy->process('text');
+		$texy->free();
+		return $texy;
+	}
+
+
+	public function helpers(Texy $texy, string $s): array
+	{
+		return [
+			Helpers::webalize($s),
+			Helpers::webalize($s),
+			Helpers::webalize($s),
+			Helpers::freezeSpaces($s),
+			Helpers::unfreezeSpaces($s),
+			Helpers::normalize($s),
+			Helpers::outdent($s),
+			Helpers::isRelative($s),
+			Helpers::prependRoot($s, '/'),
+			\htmlspecialchars($s, ENT_NOQUOTES, 'UTF-8'),
+			Helpers::unescapeHtml($s),
+			Helpers::outdent($s),
+			Helpers::toLower($s),
+			Helpers::toAscii($s),
+			Utf::toUtf($s, 'cp1250'),
+			Utf::utfTo($s, 'cp1250'),
+			Utf::utf2html($s, 'cp1250'),
+		];
+	}
+
+
+	public function elements(Modifier $modifier, Image $image, HandlerInvocation $invocation): void
+	{
+		$el = new \Texy\HtmlElement('p');
+		$text = HtmlElement::InnerText;
+		$transparent = HtmlElement::InnerTransparent;
+		$mod = new Modifier(s: '.class');
+		$modifier->setProperties(s: '.class');
+		$cite = $modifier->cite;
+		$image->overURL = 'over.gif';
+		$invocation->free();
+		$limit = LongWordsModule::SAFE_LIMIT;
+		$dont = LongWordsModule::DONT;
+		$html5 = Texy::HTML5;
+		$link = new \Texy\Link('https://texy.info');
+		$config = \Texy\Configurator::class;
+	}
+
+
+	public function latte(\Latte\Engine $latte, Texy $texy): void
+	{
+		new TexyMacro($latte, $texy);
+	}
+}
+
+
+class MyTexy extends Texy
+{
+	public function __construct()
+	{
+		parent::__construct();
+		$this->setOutputMode(self::HTML5);
+		$this->htmlOutputModule->indent = false;
+		$this->encoding = 'utf-8';
+		self::webalize('x');
+	}
+
+
+	public function free(): void
+	{
+	}
+}
+
+
+class Article
+{
+	use Strict;
+
+	public string $text = '';
+}
