@@ -1,0 +1,62 @@
+22: Method `Texy\Texy::setOutputMode()` is forbidden: there is no replacement; the output is always HTML5.
+22: Constant `Texy\Texy::XHTML1_STRICT` is forbidden: there is no replacement; XHTML is not generated any more and the output is always HTML5.
+23: Method `Texy\Texy::getOutputMode()` is forbidden: there is no replacement; the output is always HTML5.
+24: Property `Texy\Texy::$encoding` is forbidden: the input and the output are always UTF-8; drop the setting.
+25: Property `Texy\Texy::$styleSheet` is forbidden: there is no replacement; Texy never read the property; keep the stylesheet in a variable of the application.
+26: Property `Texy\Texy::$xhtml` is forbidden: there is no replacement; the output is always HTML5; drop the setting.
+27: Static property `Texy\Texy::$strictDTD` is forbidden: there is no replacement; the output is always HTML5; drop the setting.
+28: Static property `Texy\Texy::$advertisingNotice` is forbidden: the property had no effect since it was deprecated; drop the setting.
+29: Property `Texy\Texy::$cleaner` is replaced by `Texy::$htmlOutputModule`.
+30: Property `Texy\Modules\HtmlOutputModule::$removeOptional` is forbidden: optional end tags are never removed; drop the setting.
+31: Property `Texy\Modules\LinkModule::$popupOnClick` is forbidden: there is no replacement; pop-up links are not supported.
+32: Property `Texy\Modules\LinkModule::$imageOnClick` is forbidden: there is no replacement; pop-up links are not supported.
+33: Property `Texy\Modules\ImageModule::$onLoad` is forbidden: there is no replacement; the mouse-over state of images is not supported.
+34: Property `Texy\Modules\ScriptModule::$handler` is forbidden: register a handler of the `script` event with `Texy\Texy::addHandler()`, which receives the parser, the command, the arguments and the raw text.
+35: Property `Texy\Texy::$dtd` is forbidden: the DTD is a static read-only table and can no longer be changed at run time.
+36: Property `Texy\Texy::$_classes` is forbidden: the property is private; the allowed classes are configured by `$allowedClasses`.
+37: Property `Texy\Texy::$_styles` is forbidden: the property is private; the allowed styles are configured by `$allowedStyles`.
+38: Static property `Texy\HtmlElement::$xhtml` is forbidden: there is no replacement; the output is always HTML5; drop the setting.
+39: Constant `Texy\Texy::REVISION` is forbidden: there is no replacement; `VERSION` holds the version.
+40: Method `Texy\Modules\LinkModule::solveUrlEmail()` is forbidden: the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`.
+41: Method `Texy\Modules\HtmlOutputModule::postProcess()` is forbidden: the method is private; customize the output with a handler registered by `Texy\Texy::addHandler()`.
+42: Method `Texy\Modules\BlockQuoteModule::citeLink()` is forbidden: there is no replacement; support for the `cite` attribute is gone.
+44: Method `Texy\Texy::free()` is forbidden: the method was empty; drop the call.
+52: Static method `Texy\Texy::webalize()` is replaced by `Texy\Helpers::webalize()`.
+53: Static method `Texy\Texy::webalize()` is replaced by `Texy\Helpers::webalize()`.
+53: Static method `Texy\Helpers::webalize()` is replaced by `webalize($s)`.
+54: Static method `Texy\Helpers::webalize()` is replaced by `webalize($s)`.
+55: Static method `Texy\Texy::freezeSpaces()` is replaced by `Texy\Helpers::freezeSpaces()`.
+56: Static method `Texy\Texy::unfreezeSpaces()` is replaced by `Texy\Helpers::unfreezeSpaces()`.
+57: Static method `Texy\Texy::normalize()` is replaced by `Texy\Helpers::normalize()`.
+58: Static method `Texy\Texy::outdent()` is replaced by `Texy\Helpers::outdent()`.
+59: Static method `Texy\Texy::isRelative()` is replaced by `Texy\Helpers::isRelative()`.
+60: Static method `Texy\Texy::prependRoot()` is replaced by `Texy\Helpers::prependRoot()`.
+61: Static method `Texy\Texy::escapeHtml()` is replaced by `\htmlspecialchars($s, ENT_NOQUOTES, 'UTF-8')`.
+62: Static method `Texy\Texy::unescapeHtml()` is replaced by `Texy\Helpers::unescapeHtml()`.
+63: Method `Texy\Modules\BlockModule::outdent()` is replaced by `\Texy\Helpers::outdent($s)`.
+64: Static method `Texy\Utf::strtolower()` is replaced by `Texy\Helpers::toLower()`.
+65: Static method `Texy\Utf::utf2ascii()` is replaced by `Texy\Helpers::toAscii()`.
+66: Static method `Texy\Utf::toUtf()` is forbidden: the input is assumed to be UTF-8; drop the call.
+67: Static method `Texy\Utf::utfTo()` is forbidden: the output is always UTF-8; drop the call.
+68: Static method `Texy\Utf::utf2html()` is forbidden: the output is always UTF-8; drop the call where the page is UTF-8 too.
+75: Class `TexyHtml` is replaced by `Texy\HtmlElement`.
+76: Constant `Texy\HtmlElement::INNER_TEXT` is replaced by `HtmlElement::InnerText`.
+77: Constant `Texy\HtmlElement::INNER_TRANSPARENT` is replaced by `HtmlElement::InnerTransparent`.
+78: Constructor `Texy\Modifier::__construct()` is replaced by `new \Texy\Modifier(s: $m, ...)`.
+79: Method `Texy\Modifier::setProperties()` is replaced by `setProperties(s: $m)`.
+80: Property `Texy\Modifier::$cite` is forbidden: there is no replacement; support for the `cite` attribute is gone.
+81: Property `Texy\Image::$overURL` is forbidden: there is no replacement; the mouse-over state of images is not supported.
+82: Method `Texy\HandlerInvocation::free()` is forbidden: the method was empty; drop the call.
+83: Constant `Texy\Modules\LongWordsModule::SAFE_LIMIT` is forbidden: there is no replacement; the constant is private.
+84: Constant `Texy\Modules\LongWordsModule::DONT` is forbidden: there is no replacement; the constant is private.
+85: Constant `Texy\Texy::HTML5` is forbidden: there is no replacement; the output is always HTML5.
+86: Class `TexyLink` is replaced by `Texy\Link`.
+87: Class `TexyConfigurator` is replaced by `Texy\Configurator`.
+93: Class `Texy\Bridges\Latte\TexyMacro` is forbidden: support for Latte 2 is gone; register `new Texy\Bridges\Latte\TexyExtension($texy)` with `Latte\Engine::addExtension()`.
+103: Method `Texy\Texy::setOutputMode()` is forbidden: there is no replacement; the output is always HTML5.
+103: Constant `Texy\Texy::HTML5` is forbidden: there is no replacement; the output is always HTML5.
+104: Property `Texy\Texy::$cleaner` is replaced by `Texy::$htmlOutputModule`.
+105: Property `Texy\Texy::$encoding` is forbidden: the input and the output are always UTF-8; drop the setting.
+106: Method `Texy\Texy::webalize()` is replaced by `Texy\Helpers::webalize()`, but `self::` may call the method on the object, which the other class cannot.
+110: Method `Texy\Texy::free()` is forbidden: the method was empty; drop the call.
+118: Class `Texy\Strict` is forbidden: there is no replacement; the trait is gone; undefined members follow plain PHP semantics.
