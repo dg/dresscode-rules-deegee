@@ -1,0 +1,128 @@
+<?php
+
+namespace App;
+
+use Dibi\Bridges\Nette\DibiExtension3;
+use Dibi\Bridges\Tracy\Panel;
+use Dibi\Connection;
+use Dibi\DateTime;
+use Dibi\Drivers\FirebirdDriver;
+use Dibi\Drivers\MySqliDriver;
+use Dibi\Fluent;
+use Dibi\Loggers\FileLogger;
+use Dibi\Type;
+
+
+class Model
+{
+	public function __construct(
+		private Connection $db,
+	) {
+	}
+
+
+	public function save(array $data): int
+	{
+		$this->db->query('INSERT INTO items', $data);
+		$count = $this->db->getAffectedRows();
+		$id = $this->db->getInsertId('items_id_seq');
+		return $this->db->getInsertId();
+	}
+
+
+	public function saveStatic(array $data): int
+	{
+		\dibi::query('INSERT INTO items', $data);
+		$count = \dibi::getAffectedRows();
+		return \dibi::getInsertId();
+	}
+
+
+	public function types(): array
+	{
+		$result = $this->db->query('SELECT * FROM items');
+		$result->setType('price', Type::Float);
+		$result->setTypes(['name' => Type::Text, 'data' => Type::Binary, 'active' => Type::Bool, 'id' => Type::Integer]);
+		$result->setTypes(['day' => Type::Date, 'created' => Type::DateTime, 'at' => Type::Time, 'span' => Type::TimeInterval]);
+		return $result->fetchAll();
+	}
+
+
+	public function fluent(Fluent $fluent): string
+	{
+		$fluent->select('*')->setFlag(Fluent::Remove);
+		$id = \Dibi\Fluent::Identifier;
+		$rows = \Dibi\Fluent::AffectedRows;
+		return \dibi::Version;
+	}
+
+
+	public function errors(\Dibi\DriverException $e): bool
+	{
+		return in_array($e->getCode(), [MySqliDriver::ErrorDuplicateEntry, MySqliDriver::ErrorAccessDenied, MySqliDriver::ErrorDataTruncated], true)
+			|| $e->getCode() === FirebirdDriver::ErrorExceptionThrown;
+	}
+
+
+	public function dates(DateTime $date): array
+	{
+		return [$date->modify('+1 day'), $date->modifyClone()];
+	}
+
+
+	public function logging(Connection $db): void
+	{
+		$db->onEvent[] = [new FileLogger(__DIR__ . '/log.sql'), 'logEvent'];
+		$db->onEvent[] = [new FileLogger(__DIR__ . '/errors.sql', errorsOnly: true), 'logEvent'];
+		(new Panel(true))->register($db);
+		(new Panel(false))->register($db);
+	}
+
+
+	public function extensions(): void
+	{
+		Fluent::extensionMethod('paginate', fn(Fluent $fluent, int $page) => $fluent->limit(10)->offset($page * 10));
+		\Dibi\Result::extensionMethod('fetchIds', fn(\Dibi\Result $result) => $result->fetchPairs(null, 'id'));
+	}
+
+
+	public function extension(): DibiExtension3
+	{
+		return new DibiExtension3(true, false);
+	}
+}
+
+
+class LoggingConnection extends Connection
+{
+	protected function translateArgs(array $args): string
+	{
+		$sql = parent::translateArgs($args);
+		error_log($sql);
+		return $sql;
+	}
+
+
+	public function __sleep()
+	{
+		return ['config'];
+	}
+
+
+	public function __wakeup()
+	{
+		$this->connect();
+	}
+
+
+	public function lastId(): int
+	{
+		return self::getInsertId();
+	}
+}
+
+
+class Entity
+{
+	use \Dibi\Strict;
+}
